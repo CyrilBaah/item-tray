@@ -1,0 +1,22 @@
+{
+  "name": "item-tray",
+  "version": "1.0.0",
+  "description": "An application for managing items in a tray",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.18.3",
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "CyrilBaah",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}
