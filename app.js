@@ -16,7 +16,7 @@ let items = [
 
 
 app.get('/', (req, res) => {
-    res.send("🍽️ Item Tray | Ready to serve!!! 🚀");
+  res.send(`🍽️ ${process.env.APP_NAME} | Ready to serve!!! 🚀`);
 });
 
 app.get('/items', (req, res) => {

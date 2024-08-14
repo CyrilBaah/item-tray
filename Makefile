@@ -39,3 +39,46 @@ ps-all:
 # View Docker images
 images:
 	docker images
+
+# Execute a command inside the running container (e.g., bash shell)
+exec:
+	docker exec -it $(CONTAINER_NAME) bash
+
+# Create Kubernetes cluster with 2 worker and one control plane
+create-cluster:
+	kind create cluster --config cluster-config.yml
+
+# Delete the Kubernetes cluster 
+delete-cluster:
+	kind delete cluster --name kind
+
+# Make service accessible
+port-forward:
+	kubectl port-forward service/item-tray 3000:4000
+
+# Clean up (stop and remove) all containers and images
+clean:
+	docker stop $(shell docker ps -aq) || true
+	docker rm $(shell docker ps -aq) || true
+	docker rmi $(shell docker images -aq) || true
+
+# Help target to display available targets and their descriptions
+help:
+	@echo "Available targets:"
+	@echo "  build           Build Docker image"
+	@echo "  run             Run Docker container in detached mode"
+	@echo "  stop            Stop Docker container"
+	@echo "  remove          Remove Docker container"
+	@echo "  remove-image    Remove Docker image"
+	@echo "  ps              View running containers"
+	@echo "  ps-all          View all containers (including stopped ones)"
+	@echo "  images          View Docker images"
+	@echo "  exec            Execute a command inside the running container"
+	@echo "  clean           Clean up (stop and remove) all containers and images"
+	@echo "  help            Display this help message"
+	@echo "  create-cluster  Create Kubernetes cluster with 2 worker and one control plane"
+	@echo "  delete-cluster  Delete the Kubernetes cluster"
+
+
+# Make the 'build' target the default target when 'make' is run without arguments
+.DEFAULT_GOAL := build

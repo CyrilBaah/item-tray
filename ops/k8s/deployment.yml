@@ -1,0 +1,35 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: item-tray
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: item-tray
+  template:
+    metadata:
+      labels:
+        app: item-tray
+    spec:
+      containers:
+      - name: item-tray
+        image: cyrilbaah/item-tray
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+        env:
+          - name: PORT
+            value: "4000"
+          - name: APP_NAME
+            value: "item-tray"
+        ports:
+          - containerPort: 4000
+          
+              
+        
