@@ -3,15 +3,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: item-tray
+  labels:
+    app: item-tray
+    tags.datadoghq.com/env: development
+    tags.datadoghq.com/service: item-tray
+    tags.datadoghq.com/version: "1.0" 
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: item-tray
+      tags.datadoghq.com/env: development
+      tags.datadoghq.com/service: item-tray
+      tags.datadoghq.com/version: "1.0"
   template:
     metadata:
       labels:
         app: item-tray
+        tags.datadoghq.com/env: development
+        tags.datadoghq.com/service: item-tray
+        tags.datadoghq.com/version: "1.0" 
+        admission.datadoghq.com/enabled: "true"
     spec:
       containers:
       - name: item-tray
@@ -28,6 +40,12 @@ spec:
             value: "4000"
           - name: APP_NAME
             value: "item-tray"
+          - name: DD_LOGS_INJECTION
+            value: "true"
+          - name: DD_ANALYTICS_ENABLED
+            value: "true"
+          - name: DD_PROFILING_ENABLED
+            value: "true"
         ports:
           - containerPort: 4000
           

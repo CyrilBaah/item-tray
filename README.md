@@ -65,11 +65,15 @@ Example using cURL (replace <itemId> with the actual item ID):
 curl -X DELETE http://localhost:4000/items/<itemId>
 ```
 
-
-
-
 ## Using Docker
 Refer to the Makefile to already prepare commands | [Makefile](https://github.com/CyrilBaah/item-tray/blob/dev/Makefile)
+
+## Implement Datadog APM (using the method of admission controller)
+Guide
+- [Injecting Libraries Locally](https://docs.datadoghq.com/tracing/trace_collection/library_injection_local/?tab=kubernetes "DataDog") 
+- [Datadog Admission Controller](https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=datadogoperator "DataDog") 
+
+
 
 ## Set Up [Ingress](https://kind.sigs.k8s.io/docs/user/ingress/#using-ingress)
 

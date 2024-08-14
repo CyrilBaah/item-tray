@@ -2,10 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: item-tray
+  labels:
+    app: item-tray
+    tags.datadoghq.com/env: development
+    tags.datadoghq.com/service: item-tray
 spec:
   type: LoadBalancer
   selector:
     app: item-tray
+    tags.datadoghq.com/env: development
+    tags.datadoghq.com/service: item-tray
   ports:
   - port: 4000
     targetPort: 4000
