@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 
 const app = express();
 app.use(bodyParser.json());
+dotenv.config();
 
 let nextItemId = 4; // Starting ID for new items
 

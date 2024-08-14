@@ -4,6 +4,7 @@
   "description": "An application for managing items in a tray",
   "main": "app.js",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.18.3",
     "nodemon": "^3.1.0"
   },
