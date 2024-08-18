@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: my-app-image:latest  # Replace with your app's Docker image
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: "my-rds-instance.xxxxxxxxxxx.us-west-2.rds.amazonaws.com"  # Replace with your RDS endpoint
+        - name: DB_PORT
+          value: "5432"  # Change to your DB's port (e.g., 5432 for PostgreSQL)
+        - name: DB_NAME
+          value: "mydatabase"  # Replace with your database name
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
