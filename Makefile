@@ -54,7 +54,7 @@ delete-cluster:
 
 # Make service accessible
 port-forward:
-	kubectl port-forward service/item-tray 3000:4000
+	kubectl port-forward service/item-tray 4000:4000
 
 # Clean up (stop and remove) all containers and images
 clean:

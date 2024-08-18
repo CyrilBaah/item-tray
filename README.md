@@ -68,15 +68,23 @@ curl -X DELETE http://localhost:4000/items/<itemId>
 ## Using Docker
 Refer to the Makefile to already prepare commands | [Makefile](https://github.com/CyrilBaah/item-tray/blob/dev/Makefile)
 
-## Implement Datadog APM (using the method of admission controller)
-Guide
+## Reference Guide
 - [Injecting Libraries Locally](https://docs.datadoghq.com/tracing/trace_collection/library_injection_local/?tab=kubernetes "DataDog") 
 - [Datadog Admission Controller](https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=datadogoperator "DataDog") 
+- [Admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
+
+
+# Set Kubernetes Cluster
+
+- [KinD](https://kind.sigs.k8s.io/docs/user/quick-start/)
+- [AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/setting-up.html)
+- [AWS AKS](https://learn.microsoft.com/en-us/azure/aks/)
+
+# Reference
 
 
 
 ## Set Up [Ingress](https://kind.sigs.k8s.io/docs/user/ingress/#using-ingress)
-
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
