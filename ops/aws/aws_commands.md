@@ -30,12 +30,12 @@ kubectl run -i --tty --rm psql-client --image=postgres --restart=Never -- psql -
 kubectl port-forward svc/postgres 5432:5432
 ```
 
-# Coonect
+# Connect
 ```sh
 psql -h localhost -U myuser -d mydatabase
 ```
 
-kubectl create secret generic datadog-secret --from-literal api-key=cf01e4df2da6756e701c11dae4cebb17 --from-literal app-key=10af1674d99860a89d4bcd847a6b8f8b8a7b0750
+kubectl create secret generic datadog-secret --from-literal api-key=xxxxxxxx --from-literal app-key=xxxxxxxx
 
 az aks get-credentials --name "aksdemo" --resource-group "RG1"
 

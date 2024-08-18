@@ -8,7 +8,7 @@ spec:
       enabled: true
   global:
     credentials:
-      apiKey: 85e22b888946846912f057daf458dadb
+      apiKey: xxxxxxxxxx
     kubelet:
       host:
         fieldRef:
