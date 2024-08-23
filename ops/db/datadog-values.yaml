@@ -1,0 +1,35 @@
+datadog:
+  apiKey: my-api-key
+  appKey: my-app-key
+  site: datadoghq.com
+
+  # Requires supported node image version
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+
+providers:
+  aks:
+    enabled: true
+
+clusterAgent:
+  confd:
+    postgres.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - dbm: my-rds.eu-west-1.rds.amazonaws.com
+          port: 5432
+          username: 'postgres'
+          password: 'ENC[my-password]'
+          ssl: 'require'
+          azure:
+            deployment_type: 'flexible'
+            fully_qualified_domain_name: 'my-rds.eu-west-1.rds.amazonaws.com'      
+
+clusterChecksRunner:
+  enabled: true
+

@@ -55,3 +55,15 @@ kubectl exec -it postgres-dd9d647d8-rl476 -- psql -U postgres -d postgres -c "SE
 kubectl exec -it postgres-5cfcfd6cff-7drpt -- psql -U postgres -d postgres -c "SHOW shared_preload_libraries;"
 kubectl exec -it postgres-5cfcfd6cff-7drpt -- psql -U postgres -d postgres -c "SELECT * FROM pg_stat_statements LIMIT 1;"
 
+ psql -h my-rds.eu-west-1.rds.amazonaws.com -U datadog postgres -A \
+  -c "select * from pg_stat_database limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h my-rds.eu-west-1.rds.amazonaws.com -U datadog postgres -A \
+  -c "select * from pg_stat_activity limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h my-rds.eu-west-1.rds.amazonaws.com -U datadog postgres -A \
+  -c "select * from pg_stat_statements limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"

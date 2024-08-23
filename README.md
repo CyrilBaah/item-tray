@@ -72,6 +72,8 @@ Refer to the Makefile to already prepare commands | [Makefile](https://github.co
 - [Injecting Libraries Locally](https://docs.datadoghq.com/tracing/trace_collection/library_injection_local/?tab=kubernetes "DataDog") 
 - [Datadog Admission Controller](https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=datadogoperator "DataDog") 
 - [Admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
+- [Database Monitoring](https://docs.datadoghq.com/database_monitoring/setup_postgres/azure/?tab=kubernetes)
+
 
 
 # Set Kubernetes Cluster
