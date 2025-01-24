@@ -89,7 +89,7 @@ jobs:
             [Service]
             SyslogIdentifier=itemtray
             User=www-data
-            WorkingDirectory=/home/ubuntu/projects/itemtray
+            WorkingDirectory=/home/projects/itemtray
             ExecStart=/usr/bin/npm run start
             Environment="PORT=3060"
             Restart=on-failure
