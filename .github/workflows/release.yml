@@ -33,7 +33,7 @@ jobs:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
         run: |
-          scp -o StrictHostKeyChecking=no -r * $EC2_USER@$EC2_HOST:/home/projects/item-tray
+          scp -o StrictHostKeyChecking=no -r * $EC2_USER@$EC2_HOST:/home/projects/itemtray
 
       - name: Execute Docker commands on EC2
         env:
@@ -44,7 +44,7 @@ jobs:
             ls
             echo "success"
 
-            cd /home/projects/item-tray
+            cd /home/projects/itemtray
             cat a.txt
 
           EOF
@@ -56,7 +56,7 @@ jobs:
         run: |
             ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
 
-            cd /home/projects/item-tray
+            cd /home/projects/itemtray
             sudo rm -rf node_modules
             npm install
             #npm run build
@@ -91,7 +91,7 @@ jobs:
             User=www-data
             WorkingDirectory=/home/projects/itemtray
             ExecStart=/usr/bin/npm run start
-            Environment="PORT=3060"
+            Environment="PORT=3000"
             Restart=on-failure
             RestartSec=10
             KillSignal=SIGINT
