@@ -103,3 +103,18 @@ jobs:
             sudo systemctl enable itemtray.service
             fi
             sudo systemctl stop itemtray.service
+
+      - name: Start the application
+        env:
+            EC2_HOST: ${{ secrets.EC2_HOST }}
+            EC2_USER: ${{ secrets.EC2_USER }}
+        run: |
+            ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+
+            # Start and check the service
+            sudo systemctl start itemtray.service
+            sudo systemctl status itemtray.service
+
+            echo "Project started successfully"
+            
+            EOF
