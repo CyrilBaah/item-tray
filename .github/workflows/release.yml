@@ -93,11 +93,11 @@ jobs:
             WantedBy=multi-user.target
             EOL
             
-                    sudo systemctl enable itemtray.service
-                    fi
-            
-                    sudo systemctl stop itemtray.service
-            
-                    echo "System configuration created successfully"
-                EOF
+            sudo systemctl enable itemtray.service
+            fi
+    
+            sudo systemctl stop itemtray.service
+    
+            echo "System configuration created successfully"
+                
             
