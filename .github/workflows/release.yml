@@ -87,7 +87,7 @@ jobs:
 
             [Service]
             SyslogIdentifier=itemtray
-            User=www-data
+            User=root
             WorkingDirectory=/home/projects/itemtray
             ExecStart=/usr/bin/npm run start
             Environment="PORT=3000"
