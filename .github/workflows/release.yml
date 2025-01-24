@@ -48,3 +48,56 @@ jobs:
             cat a.txt
 
           EOF
+
+      - name: Install dependencies and build project
+        env:
+            EC2_HOST: ${{ secrets.EC2_HOST }}
+            EC2_USER: ${{ secrets.EC2_USER }}
+        run: |
+            ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+
+            cd /home/projects/item-tray
+            sudo rm -rf node_modules
+            npm install
+            #npm run build
+
+            echo "Dependencies installed and project built successfully"
+            EOF
+
+      - name: Create System Configuration (Service)
+        env:
+            EC2_HOST: ${{ secrets.EC2_HOST }}
+            EC2_USER: ${{ secrets.EC2_USER }}
+        run: |
+            ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
+
+            # Check and configure systemd service
+            if [[ ! -f "/etc/systemd/system/itemtray.service" ]]
+            then
+                sudo bash -c 'cat > /etc/systemd/system/itemtray.service <<EOL
+                [Unit]
+                Description=itemtray
+                After=network.target
+
+                [Service]
+                SyslogIdentifier=itemtray
+                User=ubuntu
+                WorkingDirectory=/home/ubuntu/projects/itemtray
+                ExecStart=/usr/bin/npm run start
+                Environment="PORT=3000"
+                Restart=on-failure
+                RestartSec=10
+                KillSignal=SIGINT
+
+                [Install]
+                WantedBy=multi-user.target
+                EOL'
+
+                sudo systemctl enable itemtray.service
+            fi
+
+            sudo systemctl stop itemtray.service
+
+            echo "System configuration created successfully"
+            
+            EOF
