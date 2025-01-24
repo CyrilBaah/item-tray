@@ -45,7 +45,6 @@ jobs:
             echo "success"
 
             cd /home/projects/itemtray
-            cat a.txt
 
           EOF
 
