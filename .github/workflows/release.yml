@@ -72,32 +72,32 @@ jobs:
             ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << "EOF"
         
             # Check and configure systemd service
-            if [[ ! -f "/etc/systemd/system/itemtray.service" ]]; then
-        
-                sudo tee /etc/systemd/system/itemtray.service > /dev/null <<EOL
+            if [[ ! -f "/etc/systemd/system/itemtray.service" ]]
+            then
+                    
+            sudo chmod -R 777 /etc/systemd/system
+            sudo cat >> /etc/systemd/system/itemtray.service <<EOL
+
             [Unit]
             Description=itemtray
+
             After=network.target
-            
+
             [Service]
             SyslogIdentifier=itemtray
-            User=ubuntu
-            WorkingDirectory=/home/ubuntu/projects/itemtray
-            ExecStart=/usr/bin/npm run start
-            Environment="PORT=3000"
+            User=www-data
+            WorkingDirectory=/var/www/html/ComplianceCBA/
+            ExecStart=node .output/server/index.mjs
+            Environment="PORT=3060"
             Restart=on-failure
             RestartSec=10
             KillSignal=SIGINT
-            
+
+
             [Install]
             WantedBy=multi-user.target
             EOL
-            
+
             sudo systemctl enable itemtray.service
             fi
-    
             sudo systemctl stop itemtray.service
-    
-            echo "System configuration created successfully"
-                
-            
